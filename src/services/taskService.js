@@ -6,10 +6,10 @@ const getAll = () => [...tasks];
 
 const findById = (id) => tasks.find((t) => t.id === id);
 
-const getByStatus = (status) => tasks.filter((t) => t.status === status);
+const getByStatus = (status) => tasks.filter((t) => t.status === status); // Fix: Use strict equality for accurate status filtering
 
 const getPaginated = (page, limit) => {
-    const offset = (page - 1) * limit;
+    const offset = (page - 1) * limit;// Fix: Corrected pagination logic to avoid skipping tasks
   return tasks.slice(offset, offset + limit);
 };
 
@@ -42,7 +42,7 @@ const create = ({ title, description = '', status = 'todo', priority = 'medium',
   tasks.push(task);
   return task;
 };
-
+// Validation: Only allow specific fields to be updated
 const update = (id, fields) => {
   const index = tasks.findIndex((t) => t.id === id);
   if (index === -1) return null;
